@@ -17,24 +17,12 @@
 
     <!-- List of all artworks -->
     <ul>
-        <% artworks.forEach(artwork=> { %>
+        <% artwork.forEach(artwork=> { %>
             <li>
                 <!-- Link to the specific artwork's detail page -->
                 <a href="/artworks/<%= artwork._id %>">
                     <%= artwork.title %>
                 </a>
-                <p>By: <%= artwork.artist %>
-                </p>
-                <p>Location: <%= artwork.location %>
-                </p>
-                <p>Type: <%= artwork.type %>
-                </p>
-                <!-- Link to edit the specific artwork -->
-                <a href="/artworks/<%= artwork._id %>/edit">Edit</a>
-                <!-- Form to delete the specific artwork -->
-                <form action="/artworks/<%= artwork._id %>?_method=DELETE" method="POST" style="display:inline;">
-                    <button type="submit">Delete</button>
-                </form>
             </li>
             <% }) %>
     </ul>
