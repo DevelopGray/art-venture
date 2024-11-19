@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= artwork.title %> - Details
+    </title>
+</head>
+
+<body>
+    <!-- Display the title of the artwork -->
+    <h1>
+        <%= artwork.title %>
+    </h1>
+
+    <!-- Display the location of the artwork -->
+    <h2>Location: <%= artwork.location %>
+    </h2>
+
+    <!-- Display the type of artwork -->
+    <p>Type: <%= artwork.type %>
+    </p>
+
+    <!-- Display the artist's name -->
+    <p>Artist: <%= artwork.artist %>
+    </p>
+
+    <!-- Display the description of the artwork -->
+    <p>Description: <%= artwork.description %>
+    </p>
+
+    <!-- Display associated images, if available -->
+    <% if (artwork.images && artwork.images.length> 0) { %>
+        <div>
+            <h3>Images:</h3>
+            <% artwork.images.forEach(image=> { %>
+                <img src="<%= image %>" alt="<%= artwork.title %> Image" style="max-width: 100%; height: auto;">
+                <% }); %>
+        </div>
+        <% } else { %>
+            <p>No images available for this artwork.</p>
+            <% } %>
+
+                <!-- Links to edit or delete the artwork -->
+                <div>
+                    <a href="/artworks/<%= artwork._id %>/edit">Edit</a>
+                    <form action="/artworks/<%= artwork._id %>?_method=DELETE" method="POST" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                </div>
+
+                <!-- Link to go back to the list of artworks -->
+                <a href="/artworks">Back to All Artworks</a>
+</body>
+
+</html>

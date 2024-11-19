@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Artwork</title>
+</head>
+
+<body>
+    <!-- Form for editing an existing artwork -->
+    <form action="/artworks/<%= artwork._id %>?_method=PUT" method="POST">
+        <!-- Input for the artwork title -->
+        <div>
+            <label for="title">Title</label>
+            <input type="text" name="artwork[title]" id="title" value="<%= artwork.title %>" required>
+        </div>
+
+        <!-- Input for the artwork description -->
+        <div>
+            <label for="description">Description</label>
+            <textarea name="artwork[description]" id="description" required><%= artwork.description %></textarea>
+        </div>
+
+        <!-- Input for the artist's name -->
+        <div>
+            <label for="artist">Artist</label>
+            <input type="text" name="artwork[artist]" id="artist" value="<%= artwork.artist %>" required>
+        </div>
+
+        <!-- Input for the artwork location -->
+        <div>
+            <label for="location">Location</label>
+            <input type="text" name="artwork[location]" id="location" value="<%= artwork.location %>" required>
+        </div>
+
+        <!-- Dropdown for selecting the type of art -->
+        <div>
+            <label for="type">Type of Art</label>
+            <select name="artwork[type]" id="type" required>
+                <option value="" disabled>Select a type</option>
+                <% artworkTypes.forEach(type=> { %>
+                    <!-- Pre-select the current type of the artwork -->
+                    <option value="<%= type %>" <%=type===artwork.type ? 'selected' : '' %>>
+                        <%= type %>
+                    </option>
+                    <% }); %>
+            </select>
+        </div>
+
+        <!-- Optional input for artwork images (URLs) -->
+        <div>
+            <label for="images">Image URLs</label>
+            <input type="text" name="artwork[images][]" id="images"
+                value="<%= artwork.images ? artwork.images[0] : '' %>">
+        </div>
+
+        <!-- Submit button to save changes -->
+        <div>
+            <button type="submit">Save Changes</button>
+        </div>
+    </form>
+</body>
+
+</html>
