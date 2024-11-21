@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { Artwork } = require("./models/artwork"); // Destructure the Artwork model
+const Artwork = require("./models/artwork"); // Destructure the Artwork model
 
 // Connect to the MongoDB database
 mongoose.connect("mongodb://localhost:27017/art-venture", {});
@@ -14,388 +14,131 @@ db.once("open", async () => {
   mongoose.connection.close(); // Close the database connection when done
 });
 
+console.log(Artwork);
+
 // Seed function to populate the database with initial data
 const seedDB = async () => {
   // Delete all existing artwork documents
   await Artwork.deleteMany({});
   console.log("Cleared existing artwork data");
 
-  // Array of artwork data to seed the database
+  // Array of real artwork data to seed the database
   const artworks = [
     {
-      title: "Urban Jungle",
+      title: "Cloud Gate",
       description:
-        "A vibrant mural depicting the fusion of nature and city life.",
-      artist: "Alex Rivera",
-      location: "New York, NY",
-      type: "Mural",
-      images: ["https://example.com/images/urban_jungle.jpg"],
-    },
-    {
-      title: "Whispering Winds",
-      description: "A kinetic sculpture that moves gracefully with the wind.",
-      artist: "Samantha Lee",
+        "Also known as 'The Bean,' this reflective sculpture has become a modern symbol of Chicago. It encourages interaction as visitors see distorted reflections of themselves and the surrounding skyline.",
+      artist: "Anish Kapoor",
       location: "Chicago, IL",
-      type: "Kinetic Art",
-      images: ["https://example.com/images/whispering_winds.jpg"],
-    },
-    {
-      title: "Digital Dreams",
-      description:
-        "An interactive digital installation exploring virtual realities.",
-      artist: "Jordan Kim",
-      location: "San Francisco, CA",
-      type: "Digital Art",
-      images: ["https://example.com/images/digital_dreams.jpg"],
-    },
-    {
-      title: "Echoes of Time",
-      description:
-        "A sound art piece capturing the historical essence of the city.",
-      artist: "Liam O'Connor",
-      location: "Boston, MA",
-      type: "Sound Art",
-      images: ["https://example.com/images/echoes_of_time.jpg"],
-    },
-    {
-      title: "Light Waves",
-      description: "A mesmerizing light art installation along the riverbank.",
-      artist: "Nina Patel",
-      location: "Austin, TX",
-      type: "Light Art",
-      images: ["https://example.com/images/light_waves.jpg"],
-    },
-    {
-      title: "Nature's Embrace",
-      description:
-        "A land art piece integrating natural elements into its design.",
-      artist: "Carlos Mendes",
-      location: "Portland, OR",
-      type: "Land Art",
-      images: ["https://example.com/images/natures_embrace.jpg"],
-    },
-    {
-      title: "Harmony in Motion",
-      description: "A kinetic art sculpture symbolizing balance and movement.",
-      artist: "Emily Zhang",
-      location: "Seattle, WA",
-      type: "Kinetic Art",
-      images: ["https://example.com/images/harmony_in_motion.jpg"],
-    },
-    {
-      title: "Voices Unheard",
-      description:
-        "A performance art piece giving a platform to marginalized communities.",
-      artist: "Ravi Singh",
-      location: "Los Angeles, CA",
-      type: "Performance Art",
-      images: ["https://example.com/images/voices_unheard.jpg"],
-    },
-    {
-      title: "Reflections",
-      description:
-        "A mosaic installation reflecting the diverse cultures of the neighborhood.",
-      artist: "Maria Gonzalez",
-      location: "Miami, FL",
-      type: "Mosaic",
-      images: ["https://example.com/images/reflections.jpg"],
-    },
-    {
-      title: "Skyline Dreams",
-      description: "A mural capturing the aspirations of the city's youth.",
-      artist: "David Brown",
-      location: "Atlanta, GA",
-      type: "Mural",
-      images: ["https://example.com/images/skyline_dreams.jpg"],
-    },
-    {
-      title: "Silent Echo",
-      description: "A statue commemorating the city's rich musical heritage.",
-      artist: "Olivia Harris",
-      location: "Nashville, TN",
-      type: "Statue",
-      images: ["https://example.com/images/silent_echo.jpg"],
-    },
-    {
-      title: "Unity Fountain",
-      description:
-        "A fountain symbolizing the unity and strength of the community.",
-      artist: "Ethan Clark",
-      location: "Denver, CO",
-      type: "Fountain",
-      images: ["https://example.com/images/unity_fountain.jpg"],
-    },
-    {
-      title: "Graffiti Chronicles",
-      description:
-        "A graffiti wall narrating the history of street art in the city.",
-      artist: "Zoe Martinez",
-      location: "Philadelphia, PA",
-      type: "Graffiti",
-      images: ["https://example.com/images/graffiti_chronicles.jpg"],
-    },
-    {
-      title: "Interactive Odyssey",
-      description:
-        "An interactive art installation engaging visitors in a visual journey.",
-      artist: "Lucas Thompson",
-      location: "San Diego, CA",
-      type: "Interactive Art",
-      images: ["https://example.com/images/interactive_odyssey.jpg"],
-    },
-    {
-      title: "Temporal Mirage",
-      description:
-        "A temporary installation exploring the concept of time and space.",
-      artist: "Ava White",
-      location: "Las Vegas, NV",
-      type: "Temporary Installation",
-      images: ["https://example.com/images/temporal_mirage.jpg"],
-    },
-    {
-      title: "Projection of Dreams",
-      description:
-        "A projection mapping art piece transforming the city's architecture.",
-      artist: "Mason Green",
-      location: "Orlando, FL",
-      type: "Projection Mapping",
-      images: ["https://example.com/images/projection_of_dreams.jpg"],
-    },
-    {
-      title: "Environmental Echo",
-      description:
-        "An environmental art installation highlighting conservation efforts.",
-      artist: "Sophia Adams",
-      location: "Portland, ME",
-      type: "Environmental Art",
-      images: ["https://example.com/images/environmental_echo.jpg"],
-    },
-    {
-      title: "Street Symphony",
-      description:
-        "A street art piece blending visual art with musical elements.",
-      artist: "Benjamin Scott",
-      location: "New Orleans, LA",
-      type: "Street Art",
-      images: ["https://example.com/images/street_symphony.jpg"],
-    },
-    {
-      title: "Digital Pulse",
-      description:
-        "A digital art installation reflecting the heartbeat of the city.",
-      artist: "Isabella King",
-      location: "San Jose, CA",
-      type: "Digital Art",
-      images: ["https://example.com/images/digital_pulse.jpg"],
-    },
-    {
-      title: "Graffiti Legends",
-      description: "A graffiti mural honoring the pioneers of street art.",
-      artist: "James Wilson",
-      location: "Detroit, MI",
-      type: "Graffiti",
-      images: ["https://example.com/images/graffiti_legends.jpg"],
-    },
-    {
-      title: "Mosaic of Cultures",
-      description:
-        "A mosaic artwork celebrating the city's diversity and heritage.",
-      artist: "Ella Baker",
-      location: "St. Louis, MO",
-      type: "Mosaic",
-      images: ["https://example.com/images/mosaic_of_cultures.jpg"],
-    },
-    {
-      title: "Whispers of the Wind",
-      description:
-        "A relief sculpture that captures the motion of the wind in solid form.",
-      artist: "Nathan Torres",
-      location: "Salt Lake City, UT",
-      type: "Relief",
-      images: ["https://example.com/images/whispers_of_the_wind.jpg"],
-    },
-    {
-      title: "Eternal Glow",
-      description:
-        "A light art installation that glows softly in the evenings, creating a serene atmosphere.",
-      artist: "Grace Evans",
-      location: "Phoenix, AZ",
-      type: "Light Art",
-      images: ["https://example.com/images/eternal_glow.jpg"],
-    },
-    {
-      title: "Ocean's Lullaby",
-      description:
-        "A sound art installation that replicates the calming sound of ocean waves.",
-      artist: "Henry Wright",
-      location: "Honolulu, HI",
-      type: "Sound Art",
-      images: ["https://example.com/images/oceans_lullaby.jpg"],
-    },
-    {
-      title: "The Thinker’s Haven",
-      description:
-        "A statue representing the peaceful contemplation of human thought.",
-      artist: "Amelia Brooks",
-      location: "Washington, DC",
-      type: "Statue",
-      images: ["https://example.com/images/thinkers_haven.jpg"],
-    },
-    {
-      title: "Harmony Falls",
-      description:
-        "A fountain that combines flowing water with intricate stone carvings.",
-      artist: "Sebastian Reed",
-      location: "Charleston, SC",
-      type: "Fountain",
-      images: ["https://example.com/images/harmony_falls.jpg"],
-    },
-    {
-      title: "Rebirth of the Forest",
-      description:
-        "An environmental art project using recycled materials to depict a growing forest.",
-      artist: "Penelope Turner",
-      location: "Boulder, CO",
-      type: "Environmental Art",
-      images: ["https://example.com/images/rebirth_forest.jpg"],
-    },
-    {
-      title: "Starlight Symphony",
-      description:
-        "A kinetic sculpture inspired by the movement of stars across the night sky.",
-      artist: "Christopher Howard",
-      location: "Santa Fe, NM",
-      type: "Kinetic Art",
-      images: ["https://example.com/images/starlight_symphony.jpg"],
-    },
-    {
-      title: "Voices of the Past",
-      description:
-        "A relief art installation paying homage to historical figures of the city.",
-      artist: "Lucy Carter",
-      location: "Savannah, GA",
-      type: "Relief",
-      images: ["https://example.com/images/voices_past.jpg"],
-    },
-    {
-      title: "Festival of Colors",
-      description:
-        "A vibrant interactive art piece celebrating community festivals and traditions.",
-      artist: "Julian Barnes",
-      location: "Madison, WI",
-      type: "Interactive Art",
-      images: ["https://example.com/images/festival_colors.jpg"],
-    },
-    {
-      title: "Timeless Horizon",
-      description:
-        "A land art piece that blends seamlessly into the natural landscape.",
-      artist: "Ruby Simmons",
-      location: "Jackson Hole, WY",
-      type: "Land Art",
-      images: ["https://example.com/images/timeless_horizon.jpg"],
-    },
-    {
-      title: "Reflections of Light",
-      description:
-        "A light installation that mirrors the changing hues of the sunset.",
-      artist: "Samuel Gray",
-      location: "Palm Springs, CA",
-      type: "Light Art",
-      images: ["https://example.com/images/reflections_light.jpg"],
-    },
-    {
-      title: "Bridge to Imagination",
-      description:
-        "A digital art projection transforming a pedestrian bridge into a dynamic canvas.",
-      artist: "Charlotte Peterson",
-      location: "Pittsburgh, PA",
-      type: "Projection Mapping",
-      images: ["https://example.com/images/bridge_imagination.jpg"],
-    },
-    {
-      title: "Voices of the Sea",
-      description:
-        "A sound art installation replicating maritime echoes and calls.",
-      artist: "Ezra Robinson",
-      location: "Anchorage, AK",
-      type: "Sound Art",
-      images: ["https://example.com/images/voices_sea.jpg"],
-    },
-    {
-      title: "Phoenix Rising",
-      description: "A sculpture symbolizing hope and resilience.",
-      artist: "Victoria Bennett",
-      location: "Las Cruces, NM",
       type: "Sculpture",
-      images: ["https://example.com/images/phoenix_rising.jpg"],
+      images: [
+        "https://upload.wikimedia.org/wikipedia/en/c/c1/Cloud_Gate_%28The_Bean%29_from_east%27.jpg",
+      ],
     },
     {
-      title: "Infinite Reflections",
+      title: "LOVE Sculpture",
       description:
-        "A mirrored installation creating endless patterns and perspectives.",
-      artist: "Oscar Walker",
-      location: "Key West, FL",
-      type: "Installation",
-      images: ["https://example.com/images/infinite_reflections.jpg"],
+        "This iconic sculpture featuring the word 'LOVE' stacked with the letter 'O' leaning to the side has been a popular symbol for decades.",
+      artist: "Robert Indiana",
+      location: "New York City, NY",
+      type: "Sculpture",
+      images: [
+        "https://upload.wikimedia.org/wikipedia/commons/6/68/LOVE_sculpture_NY.JPG",
+      ],
     },
     {
-      title: "Dreamscapes",
+      title: "Chicano Park Murals",
       description:
-        "A mural featuring surrealistic landscapes blending reality and imagination.",
-      artist: "Clara Bell",
-      location: "Santa Barbara, CA",
+        "A series of murals celebrating Mexican culture, history, and the Chicano movement, painted on the support pillars of a freeway.",
+      artist: "Various artists",
+      location: "Chicano Park, San Diego, CA",
       type: "Mural",
-      images: ["https://example.com/images/dreamscapes.jpg"],
+      images: [
+        "https://upload.wikimedia.org/wikipedia/commons/8/82/Chicano_Park_Murals.png",
+      ],
     },
     {
-      title: "Community Canvas",
+      title: "The Awakening",
       description:
-        "An interactive graffiti wall inviting public participation.",
-      artist: "Nicholas Perry",
-      location: "Boise, ID",
-      type: "Graffiti",
-      images: ["https://example.com/images/community_canvas.jpg"],
+        "A giant sculpture depicting a man struggling to emerge from the earth, representing rebirth and the struggle of life.",
+      artist: "J. Seward Johnson",
+      location: "National Harbor, MD",
+      type: "Sculpture",
+      images: [
+        "https://upload.wikimedia.org/wikipedia/commons/4/4a/Beach_area_with_sculpture_of_man_at_National_Harbor_in_Maryland.JPG",
+      ],
     },
     {
-      title: "Rise and Fall",
-      description: "A kinetic sculpture representing the ebb and flow of life.",
-      artist: "Isla Jenkins",
-      location: "Duluth, MN",
-      type: "Kinetic Art",
-      images: ["https://example.com/images/rise_fall.jpg"],
-    },
-    {
-      title: "Path of Legends",
+      title: "Spiral Jetty",
       description:
-        "A temporary installation commemorating local heroes and historical events.",
-      artist: "Theo Foster",
-      location: "Cleveland, OH",
-      type: "Temporary Installation",
-      images: ["https://example.com/images/path_legends.jpg"],
+        "A large land art installation made from earth, salt crystals, and rocks, forming a coil that stretches into Great Salt Lake.",
+      artist: "Robert Smithson",
+      location: "Rozel Point, Great Salt Lake, UT",
+      type: "Land Art",
+      images: [
+        "https://upload.wikimedia.org/wikipedia/commons/5/51/Iconic_view_2.jpg",
+      ],
     },
     {
-      title: "Aurora's Embrace",
+      title: "Urban Light",
       description:
-        "A light art piece recreating the colors of the northern lights.",
-      artist: "Madeline Hughes",
-      location: "Fairbanks, AK",
+        "A collection of restored antique street lamps arranged in a grid, creating a beautiful public artwork that lights up at night.",
+      artist: "Chris Burden",
+      location: "Los Angeles County Museum of Art (LACMA), Los Angeles, CA",
+      type: "Installation",
+      images: [
+        "https://upload.wikimedia.org/wikipedia/en/d/df/Urban_Light_at_night.JPG",
+      ],
+    },
+    {
+      title: "Reflecting Absence",
+      description:
+        "Two large reflecting pools representing the void left by the Twin Towers, surrounded by names of the victims.",
+      artist: "Michael Arad and Peter Walker",
+      location: "National September 11 Memorial & Museum, New York, NY",
+      type: "Fountain",
+      images: [
+        "https://upload.wikimedia.org/wikipedia/commons/f/fc/9-11_Memorial_and_Museum_%2828815276064%29.jpg",
+      ],
+    },
+    {
+      title: "Bay Lights",
+      description:
+        "An expansive light art installation along the cables of the Bay Bridge, displaying shifting patterns that captivate viewers at night.",
+      artist: "Leo Villareal",
+      location: "San Francisco Bay Bridge, San Francisco, CA",
       type: "Light Art",
-      images: ["https://example.com/images/auroras_embrace.jpg"],
+      images: [
+        "https://upload.wikimedia.org/wikipedia/en/2/2d/Bay_Bridge_reflections_at_night.gif",
+      ],
     },
     {
-      title: "Mosaic of Hope",
-      description: "A mosaic symbolizing unity and community resilience.",
-      artist: "Tristan Collins",
-      location: "Charlottesville, VA",
-      type: "Mosaic",
-      images: ["https://example.com/images/mosaic_hope.jpg"],
+      title: "The Gates",
+      description:
+        "A temporary installation of 7,503 fabric panels suspended along 23 miles of pathways in Central Park.",
+      artist: "Christo and Jeanne-Claude",
+      location: "Central Park, New York, NY",
+      type: "Temporary Installation",
+      images: [
+        "https://upload.wikimedia.org/wikipedia/commons/b/b9/The_Gates%2C_a_site-specific_work_of_art_by_Christo_and_Jeanne-Claude_in_Central_Park%2C_New_York_City_LCCN2011633978.jpg",
+      ],
+    },
+    {
+      title: "Bronze Fonz",
+      description:
+        "A life-sized bronze statue depicting the character Arthur Fonzarelli ('The Fonz') from the television show 'Happy Days.'",
+      artist: "Gerald P. Sawyer",
+      location: "Milwaukee Riverwalk, Milwaukee, WI",
+      type: "Statue",
+      images: [
+        "https://upload.wikimedia.org/wikipedia/en/b/b9/SawyerBronzeFonz2008.jpg",
+      ],
     },
   ];
 
   // Insert artworks into the database
   await Artwork.insertMany(artworks);
-  console.log("Seed data inserted successfully!");
+  console.log("Real seed data inserted successfully!");
 };
 
 // Run the seed function

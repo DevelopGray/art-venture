@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
+const ejsMate = require("ejs-mate");
 const methodOverride = require("method-override");
 const Artwork = require("./models/artwork"); // Import the Artwork model
 const artworkTypes = Artwork.artworkTypes; // Extract the enum types for artwork
@@ -18,7 +19,9 @@ db.once("open", () => {
 
 const app = express();
 
-// Set EJS as the view engine and configure the views directory
+
+// Set ejsMate and EJS as the view engine and configure the views directory
+app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
@@ -78,6 +81,10 @@ app.delete("/artworks/:id", async (req, res) => {
   const { id } = req.params; // Extract the artwork ID from the request parameters
   await Artwork.findByIdAndDelete(id); // Delete the artwork from the database
   res.redirect("/artworks"); // Redirect to the list of artworks
+});
+
+app.use((req, res) => {
+  res.status(404).send("404 Page Not Found");
 });
 
 // Start the server on port 3000

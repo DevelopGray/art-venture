@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <%= artwork.title %> - Details
-    </title>
-</head>
-
-<body>
+<!-- <title><%= artwork.title %> - Details</title> -->
+<% layout('./layouts/boilerplate') %>
     <!-- Display the title of the artwork -->
     <h1>
         <%= artwork.title %>
@@ -53,6 +43,3 @@
 
                 <!-- Link to go back to the list of artworks -->
                 <a href="/artworks">Back to All Artworks</a>
-</body>
-
-</html>

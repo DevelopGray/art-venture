@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- <title>Edit Artwork</title> -->
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Artwork</title>
-</head>
-
-<body>
+<% layout('./layouts/boilerplate') %>
     <!-- Form for editing an existing artwork -->
     <form action="/artworks/<%= artwork._id %>?_method=PUT" method="POST">
         <!-- Input for the artwork title -->
@@ -60,10 +53,5 @@
             <button type="submit">Save Changes</button>
         </div>
     </form>
-    <footer>
-        <!-- Link to go back to the list of artworks -->
-        <a href="/artworks/<%=artwork._id%>">Cancel</a>
-    </footer>
-</body>
-
-</html>
+    <!-- Link to go back to the list of artworks -->
+    <a href="/artworks/<%=artwork._id%>">Cancel</a>

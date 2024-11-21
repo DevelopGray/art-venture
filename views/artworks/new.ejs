@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- <title>Add New Artwork</title> -->
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Artwork</title>
-</head>
-
-<body>
+    <% layout('./layouts/boilerplate') %>
     <!-- Form to create a new artwork -->
     <form action="/artworks" method="POST">
         <!-- Input field for the title of the artwork -->
@@ -58,6 +51,5 @@
             <button type="submit">Add Artwork</button>
         </div>
     </form>
-</body>
-
-</html>
+    <!-- Link to go back to the list of artworks -->
+    <a href="/artworks">Cancel</a>
