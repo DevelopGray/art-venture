@@ -2,7 +2,7 @@
 
 <% layout('./layouts/boilerplate') %>
     <!-- Form for editing an existing artwork -->
-<form action="/artworks/<%= artwork._id %>?_method=PUT" method="POST">
+<form action="/artworks/<%= artwork._id %>?_method=PUT" method="POST" novalidate class="validated-form">
 <div class="row">
     <h1 class="text-center mb-3">Edit Artwork</h1>
     <div class="col-6 offset-3">
@@ -12,18 +12,24 @@
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label>
                 <input class="form-control" type="text" name="artwork[title]" id="title" value="<%= artwork.title %>" required>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Required!</div>
             </div>
 
             <!-- Input field for the artist's name -->
             <div class="mb-3">
                 <label class="form-label" for="artist">Artist</label>
                 <input class="form-control" type="text" name="artwork[artist]" id="artist" value="<%= artwork.artist %>" required>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Required!</div>
             </div>
     
             <!-- Input field for the location of the artwork -->
             <div class=" mb-3">
                 <label class="form-label" for="location">Location</label>
                 <input class="form-control" type="text" name="artwork[location]" id="location" value="<%= artwork.location %>" required>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Required!</div>
             </div>
 
             <!-- Dropdown menu for selecting the type of artwork -->
@@ -43,12 +49,16 @@
                                 </option>
                                 <% }); %>
                 </select>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Required!</div>
             </div>
 
             <!-- Input field for a brief description of the artwork -->
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
-                <textarea class="form-control" name="artwork[description]" id="description"><%= artwork.description %></textarea>
+                <textarea class="form-control" name="artwork[description]" id="description" required><%= artwork.description %></textarea>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Required!</div>
             </div>
 
             <!-- Input field for entering image URLs (optional) -->
@@ -57,15 +67,15 @@
                 <input class="form-control" type="text" name="artwork[images][]" id="images" value="<%= artwork.images%>">
             </div>
 
-            <!-- Submit button to create the artwork -->
-            <div class="mb-3">
-                <button class="form-control btn btn-success" type="submit">Save Changes</button>
+            <!-- Submit button to create the artwork or cancel-->
+            <div class="row mb-3">
+                <div class="col-auto">
+                    <button class="btn btn-success" type="submit">Save Changes</button>
+                </div>
+                <div class="col-auto">
+                    <a class="btn btn-danger" href="/artworks">Cancel</a>
+                </div>
             </div>
-        </form>
-        <div class="mb-3">
-            <!-- Link to go back to the list of artworks -->
-            <a class="btn btn-danger" href="/artworks/<%= artwork._id %>">Cancel</a>
-        </div>
     </div>
 </div>
 </form>

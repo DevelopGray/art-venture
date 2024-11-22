@@ -4,23 +4,28 @@
     <h1 class="text-center mb-3">New Artwork</h1>
     <div class="col-6 offset-3">
         <!-- Form to create a new artwork -->
-        <form action="/artworks" method="POST">
+        <form action="/artworks" method="POST" novalidate class="validated-form">
             <!-- Input field for the title of the artwork -->
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label>
                 <input class="form-control" type="text" name="artwork[title]" id="title" placeholder="What's it called?" required>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">It needs a title!</div>
             </div>
-
             <!-- Input field for the artist's name -->
             <div class="mb-3">
                 <label class="form-label" for="artist">Artist</label>
                 <input class="form-control" type="text" name="artwork[artist]" id="artist" placeholder="Who made it?" required>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">We have to know who made it!</div>
             </div>
             
             <!-- Input field for the location of the artwork -->
             <div class="mb-3">
                 <label class="form-label" for="location">Location</label>
                 <input class="form-control" type="text" name="artwork[location]" id="location" placeholder="Where is it?" required>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">It could be anywhere</div>
             </div>
 
             <!-- Dropdown menu for selecting the type of artwork -->
@@ -34,32 +39,34 @@
                         </option>
                         <% }); %>
                 </select>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">If you don't know, we don't know!</div>
             </div>
 
             <!-- Input field for a brief description of the artwork -->
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
-                <textarea class="form-control" name="artwork[description]" id="description" placeholder="Describe this art"></textarea>
+                <textarea class="form-control" name="artwork[description]" id="description" placeholder="Describe this art" required></textarea>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Tell us a little anyway!</div>
             </div>
         
             <!-- Input field for entering image URLs (optional) -->
             <div class="mb-3">
                 <label class="form-label" for="images">Image URL</label>
-                <input class="form-control" type="text" name="artwork[images][]" id="images" placeholder="Enter image URL">
+                <input class="form-control" type="text" name="artwork[images][]" id="images" placeholder="Enter image URL" required>
+                <div class="valid-feedback">Valid URL!</div>
+                <div class="invalid-feedback">Please provide a valid URL.</div>
             </div>
-        
-            <!-- Submit button to create the artwork -->
-            <div class="mb-3">
-                <button class="form-control btn btn-success" type="submit">Add Artwork</button>
+            <!-- Submit button to create the artwork or cancel-->
+            <div class="row mb-3">
+                <div class="col-auto">
+                    <button class="btn btn-success" type="submit">Add Artwork</button>
+                </div>
+                <div class="col-auto">
+                    <a class="btn btn-danger" href="/artworks">Cancel</a>
+                </div>
             </div>
         </form>
-        <div class="mb-3">
-            <!-- Link to go back to the list of artworks -->
-            <a class="btn btn-danger" href="/artworks">Cancel</a>
-        </div>
     </div>
 </div>
-    
-    
- 
-

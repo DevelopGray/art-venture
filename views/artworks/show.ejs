@@ -14,11 +14,11 @@
                     <p>No images available for this artwork.</p>
                 <% } %>
             <div class="card-body">
-                <h5 class="card-title"><%= artwork.title %></h5>
+                <h5 class="card-title"><%= artwork.title %> - By Artist <%= artwork.artist %></h5>
                 <p class="card-text">Location: <%= artwork.location %></p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Artist: <%= artwork.artist %></li>
+                <!-- <li class="list-group-item">Artist: <%= artwork.artist %></li> -->
                 <li class="list-group-item">Type: <%= artwork.type %></li>
                 <li class="list-group-item">Description: <%= artwork.description %></li>
             </ul>
