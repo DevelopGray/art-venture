@@ -1,6 +1,9 @@
 # Ignore node modules
 node_modules/
 
+#Ignore OtherDocs Folder
+OtherDocs/
+
 # Ignore logs
 *.log
 

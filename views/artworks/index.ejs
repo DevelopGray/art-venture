@@ -9,13 +9,23 @@
     </header>
 
     <!-- List of all artworks -->
-    <ul>
-        <% artwork.forEach(artwork=> { %>
-            <li>
-                <!-- Link to the specific artwork's detail page -->
-                <a href="/artworks/<%= artwork._id %>">
-                    <%= artwork.title %>
-                </a>
-            </li>
-            <% }) %>
-    </ul>
+
+<% artwork.forEach(artwork=> { %>
+    <div class="card mb-3">
+        <div class="row">
+            <div class="col-md-4">
+                <img class="img-fluid" src="<%=artwork.images%>" alt="">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title"><%=artwork.title%></h5>
+                    <p class="card-text text-secondary"><%=artwork.artist%></p>
+                    <p class="card-text"><%=artwork.type%></p>
+                    <p class="card-text"><%=artwork.location%></p>
+                    <p class="card-text"><%=artwork.description%></p>
+                    <a class="btn btn-primary" href="/artworks/<%= artwork._id %>">View</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<% }) %>

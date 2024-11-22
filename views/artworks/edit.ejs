@@ -2,56 +2,71 @@
 
 <% layout('./layouts/boilerplate') %>
     <!-- Form for editing an existing artwork -->
-    <form action="/artworks/<%= artwork._id %>?_method=PUT" method="POST">
-        <!-- Input for the artwork title -->
-        <div>
-            <label for="title">Title</label>
-            <input type="text" name="artwork[title]" id="title" value="<%= artwork.title %>" required>
-        </div>
+<form action="/artworks/<%= artwork._id %>?_method=PUT" method="POST">
+<div class="row">
+    <h1 class="text-center mb-3">Edit Artwork</h1>
+    <div class="col-6 offset-3">
+        <!-- Form to create a new artwork -->
+        <form action="/artworks" method="POST">
+            <!-- Input field for the title of the artwork -->
+            <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" type="text" name="artwork[title]" id="title" value="<%= artwork.title %>" required>
+            </div>
 
-        <!-- Input for the artwork description -->
-        <div>
-            <label for="description">Description</label>
-            <textarea name="artwork[description]" id="description" required><%= artwork.description %></textarea>
-        </div>
+            <!-- Input field for the artist's name -->
+            <div class="mb-3">
+                <label class="form-label" for="artist">Artist</label>
+                <input class="form-control" type="text" name="artwork[artist]" id="artist" value="<%= artwork.artist %>" required>
+            </div>
+    
+            <!-- Input field for the location of the artwork -->
+            <div class=" mb-3">
+                <label class="form-label" for="location">Location</label>
+                <input class="form-control" type="text" name="artwork[location]" id="location" value="<%= artwork.location %>" required>
+            </div>
 
-        <!-- Input for the artist's name -->
-        <div>
-            <label for="artist">Artist</label>
-            <input type="text" name="artwork[artist]" id="artist" value="<%= artwork.artist %>" required>
-        </div>
+            <!-- Dropdown menu for selecting the type of artwork -->
+            <div class="mb-3">
+                <label class="form-label" for="type">Type of Art</label>
+                <select class="form-control" name="artwork[type]" id="type" required>
+                    <option value="" disabled selected>What kind of art is it?</option>
+                    <% artworkTypes.forEach(type=> { %>
+                        <option value="<%= type %>">
+                            <%= type %>
+                        </option>
+                        <% }); %>
+                            <!-- Pre-select the current type of the artwork -->
+                            <% artworkTypes.forEach(type=> { %>
+                                <option value="<%= type %>" <%=type===artwork.type ? 'selected' : '' %>>
+                                    <%= type %>
+                                </option>
+                                <% }); %>
+                </select>
+            </div>
 
-        <!-- Input for the artwork location -->
-        <div>
-            <label for="location">Location</label>
-            <input type="text" name="artwork[location]" id="location" value="<%= artwork.location %>" required>
-        </div>
+            <!-- Input field for a brief description of the artwork -->
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <textarea class="form-control" name="artwork[description]" id="description"><%= artwork.description %></textarea>
+            </div>
 
-        <!-- Dropdown for selecting the type of art -->
-        <div>
-            <label for="type">Type of Art</label>
-            <select name="artwork[type]" id="type" required>
-                <option value="" disabled>Select a type</option>
-                <% artworkTypes.forEach(type=> { %>
-                    <!-- Pre-select the current type of the artwork -->
-                    <option value="<%= type %>" <%=type===artwork.type ? 'selected' : '' %>>
-                        <%= type %>
-                    </option>
-                    <% }); %>
-            </select>
-        </div>
+            <!-- Input field for entering image URLs (optional) -->
+            <div class="mb-3">
+                <label class="form-label" for="images">Image URL</label>
+                <input class="form-control" type="text" name="artwork[images][]" id="images" value="<%= artwork.images%>">
+            </div>
 
-        <!-- Optional input for artwork images (URLs) -->
-        <div>
-            <label for="images">Image URLs</label>
-            <input type="text" name="artwork[images][]" id="images"
-                value="<%= artwork.images ? artwork.images[0] : '' %>">
+            <!-- Submit button to create the artwork -->
+            <div class="mb-3">
+                <button class="form-control btn btn-success" type="submit">Save Changes</button>
+            </div>
+        </form>
+        <div class="mb-3">
+            <!-- Link to go back to the list of artworks -->
+            <a class="btn btn-danger" href="/artworks/<%= artwork._id %>">Cancel</a>
         </div>
+    </div>
+</div>
+</form>
 
-        <!-- Submit button to save changes -->
-        <div>
-            <button type="submit">Save Changes</button>
-        </div>
-    </form>
-    <!-- Link to go back to the list of artworks -->
-    <a href="/artworks/<%=artwork._id%>">Cancel</a>
